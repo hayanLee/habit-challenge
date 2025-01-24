@@ -12,3 +12,9 @@ body {
     background-color: rgba(var(--background-rgb));
     color: rgb(var(--foreground-rgb));
 }
+
+@layer utilities {
+    .title {
+        @apply text-xl font-semibold my-2.5;
+    }
+}

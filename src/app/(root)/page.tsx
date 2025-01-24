@@ -9,7 +9,7 @@ const MainPage = () => {
                 <Profile />
 
                 <div>
-                    <h3 className='text-xl font-semibold'>Daily Sticker Challenge</h3>
+                    <h3 className='title'>Daily Sticker Challenge</h3>
                     <div>
                         <Challenge />
                         <Challenge />
@@ -17,10 +17,10 @@ const MainPage = () => {
                     </div>
                 </div>
 
-                <div className='border border-dashed my-5'></div>
+                <div className='border border-dashed mt-3'></div>
 
                 <div>
-                    <h3 className='text-xl font-semibold'>Finished</h3>
+                    <h3 className='title'>Finished</h3>
                     <div>
                         <Challenge />
                         <Challenge />
