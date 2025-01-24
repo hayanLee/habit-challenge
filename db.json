@@ -1,0 +1,65 @@
+{
+    "challenges": [
+        {
+            "id": "9f6a",
+            "period": 7,
+            "challengeName": "요가하기",
+            "isFinished": true
+        },
+        {
+            "id": "e2d7",
+            "period": 30,
+            "challengeName": "하루 한 페이지 책 읽기",
+            "isFinished": false
+        },
+        {
+            "id": "d9b3",
+            "period": 3,
+            "challengeName": "매일 운동하기",
+            "isFinished": true
+        },
+        {
+            "id": "b4c1",
+            "period": 7,
+            "challengeName": "음악 듣기",
+            "isFinished": true
+        },
+        {
+            "id": "f1e2",
+            "period": 14,
+            "challengeName": "영화 보기",
+            "isFinished": false
+        },
+        {
+            "id": "ab7d",
+            "period": 30,
+            "challengeName": "자전거 타기",
+            "isFinished": false
+        },
+        {
+            "id": "547f",
+            "period": 3,
+            "challengeName": "운동하기",
+            "isFinished": true
+        },
+        {
+            "id": "f16b",
+            "period": 7,
+            "challengeName": "영어공부하기",
+            "isFinished": true
+        },
+        {
+            "id": "10c8",
+            "period": 3,
+            "challengeName": "샐러드먹기",
+            "isFinished": false
+        },
+
+        {
+            "id": "ab50",
+            "period": 3,
+            "challengeName": "밥먹기",
+            "isFinished": false
+        }
+    ]
+}
