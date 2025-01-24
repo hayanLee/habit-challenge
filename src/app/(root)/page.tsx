@@ -4,25 +4,34 @@ import Profile from '@/components/Profile/Profile';
 import { GOAL_DETAIL } from '@/constant/pathname';
 import Link from 'next/link';
 
-const MainPage = () => {
-    const arr = Array(6)
-        .fill(0)
-        .map((_, i) => i + 1);
+export type HabitType = {
+    id: string;
+    period: number;
+    challengeName: string;
+    isFinished: boolean;
+};
+
+const MainPage = async () => {
+    const data = await fetch('http://localhost:8000/challenges');
+    const res = await data.json();
 
     return (
         <div className='flex flex-col h-full'>
             <div className='px-3.5'>
                 <Profile />
             </div>
+
             <div className='px-3.5 flex flex-col grow overflow-y-auto scrollbar-hide'>
                 <div>
-                    <h3 className='title'>Daily Sticker Challenge</h3>
+                    <h3 className='title'>Daily Challenge</h3>
                     <div>
-                        {arr.map((value) => (
-                            <Link href={GOAL_DETAIL(value)} key={value}>
-                                <Challenge id={value} />
-                            </Link>
-                        ))}
+                        {res
+                            .filter((habit: HabitType) => !habit.isFinished)
+                            .map((habit: HabitType) => (
+                                <Link href={GOAL_DETAIL(habit.id)} key={habit.id}>
+                                    <Challenge id={habit.id} habit={habit} />
+                                </Link>
+                            ))}
                     </div>
                 </div>
 
@@ -31,11 +40,13 @@ const MainPage = () => {
                 <div>
                     <h3 className='title'>Finished</h3>
                     <div>
-                        {arr.map((value) => (
-                            <Link href={GOAL_DETAIL(value)} key={`finished-${value}`}>
-                                <Challenge id={value} />
-                            </Link>
-                        ))}
+                        {res
+                            .filter((habit: HabitType) => habit.isFinished)
+                            .map((habit: HabitType) => (
+                                <Link href={GOAL_DETAIL(habit.id)} key={habit.id}>
+                                    <Challenge id={habit.id} habit={habit} />
+                                </Link>
+                            ))}
                     </div>
                 </div>
             </div>
