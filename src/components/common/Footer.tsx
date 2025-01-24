@@ -1,14 +1,17 @@
+import { GOALS_NEW, STICKERS } from '@/constant/pathname';
+import Link from 'next/link';
+
 const Footer = () => {
     return (
         <div className='w-full shadow-md flex justify-around bg-background drop-shadow-2xl'>
-            <div className='flex flex-col items-center p-1.5'>
-                <p className='text-lg'>➕</p>
+            <Link href={GOALS_NEW} className='flex flex-col items-center p-1.5 w-full'>
+                <span className='text-lg'>➕</span>
                 <p>Add</p>
-            </div>
-            <div className='flex flex-col items-center p-1.5'>
-                <p className='text-lg'>👻</p>
+            </Link>
+            <Link href={STICKERS} className='flex flex-col items-center p-1.5 w-full'>
+                <span className='text-lg'>👻</span>
                 <p>Stickers</p>
-            </div>
+            </Link>
         </div>
     );
 };

@@ -1,4 +1,4 @@
-const Challenge = () => {
+const Challenge = ({ id }: { id: number }) => {
     return (
         <div className='flex gap-3 py-2'>
             <div className='w-20 h-20 bg-gray-400'></div>
