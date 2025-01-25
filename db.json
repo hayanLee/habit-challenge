@@ -1,65 +1,84 @@
 {
     "challenges": [
         {
-            "id": "9f6a",
-            "period": 7,
-            "challengeName": "요가하기",
-            "isFinished": true
-        },
-        {
-            "id": "e2d7",
-            "period": 30,
-            "challengeName": "하루 한 페이지 책 읽기",
-            "isFinished": false
-        },
-        {
-            "id": "d9b3",
+            "id": "2001",
             "period": 3,
-            "challengeName": "매일 운동하기",
-            "isFinished": true
+            "challengeName": "카페인 줄이기",
+            "isFinished": false,
+            "startDay": "2025/01/25",
+            "endDay": "2025/01/28"
         },
         {
-            "id": "b4c1",
+            "id": "2002",
             "period": 7,
-            "challengeName": "음악 듣기",
-            "isFinished": true
+            "challengeName": "아침 일찍 일어나기",
+            "isFinished": false,
+            "startDay": "2025/01/26",
+            "endDay": "2025/02/02"
         },
         {
-            "id": "f1e2",
+            "id": "2003",
             "period": 14,
-            "challengeName": "영화 보기",
-            "isFinished": false
+            "challengeName": "매일 30분 책 읽기",
+            "isFinished": true,
+            "startDay": "2025/01/10",
+            "endDay": "2025/01/24"
         },
         {
-            "id": "ab7d",
+            "id": "2004",
             "period": 30,
-            "challengeName": "자전거 타기",
-            "isFinished": false
+            "challengeName": "운동 루틴 지키기",
+            "isFinished": false,
+            "startDay": "2025/01/27",
+            "endDay": "2025/02/26"
         },
         {
-            "id": "547f",
+            "id": "2005",
             "period": 3,
-            "challengeName": "운동하기",
-            "isFinished": true
+            "challengeName": "물 많이 마시기",
+            "isFinished": false,
+            "startDay": "2025/01/28",
+            "endDay": "2025/01/31"
         },
         {
-            "id": "f16b",
+            "id": "2006",
             "period": 7,
-            "challengeName": "영어공부하기",
-            "isFinished": true
+            "challengeName": "감사 일기 쓰기",
+            "isFinished": true,
+            "startDay": "2025/01/15",
+            "endDay": "2025/01/22"
         },
         {
-            "id": "10c8",
-            "period": 3,
-            "challengeName": "샐러드먹기",
-            "isFinished": false
+            "id": "2007",
+            "period": 14,
+            "challengeName": "저녁 산책하기",
+            "isFinished": true,
+            "startDay": "2025/01/29",
+            "endDay": "2025/02/12"
         },
-
         {
-            "id": "ab50",
-            "period": 3,
-            "challengeName": "밥먹기",
-            "isFinished": false
+            "id": "2008",
+            "period": 30,
+            "challengeName": "불필요한 소비 줄이기",
+            "isFinished": false,
+            "startDay": "2025/01/20",
+            "endDay": "2025/02/19"
+        },
+        {
+            "id": "2009",
+            "period": 7,
+            "challengeName": "매일 스트레칭하기",
+            "isFinished": false,
+            "startDay": "2025/01/30",
+            "endDay": "2025/02/06"
+        },
+        {
+            "id": "2010",
+            "period": 14,
+            "challengeName": "영어 단어 외우기",
+            "isFinished": false,
+            "startDay": "2025/01/25",
+            "endDay": "2025/02/08"
         }
     ]
 }
