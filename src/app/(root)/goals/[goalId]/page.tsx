@@ -1,6 +1,13 @@
 import { Button } from '@/components/ui/button';
 
-const GoalDetailPage = () => {
+// 나중에 db를 사용하면 period를 params로 넘길 필요 없음
+
+const GoalDetailPage = ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
+    const { period } = searchParams;
+    const days = Array(Number(period))
+        .fill(0)
+        .map((_, idx) => idx + 1);
+
     return (
         <div className='flex flex-col h-full'>
             <div className='px-3.5 flex flex-col'>
@@ -11,20 +18,11 @@ const GoalDetailPage = () => {
 
                 <div className='mx-10 mt-7 mb-24'>
                     <div className='grid grid-cols-5 gap-3.5'>
-                        <div className='day'> 1</div>
-                        <div className='day'> 2</div>
-                        <div className='day'> 3</div>
-                        <div className='day'> 4</div>
-                        <div className='day'> 5</div>
-                        <div className='day'> 6</div>
-                        <div className='day'> 7</div>
-                        <div className='day'> 8</div>
-                        <div className='day'> 9</div>
-                        <div className='day'> 10</div>
-                        <div className='day'> 11</div>
-                        <div className='day'> 12</div>
-                        <div className='day'> 13</div>
-                        <div className='day'> 14</div>
+                        {days.map((day) => (
+                            <div className='day' key={day}>
+                                {day}
+                            </div>
+                        ))}
                     </div>
                 </div>
 
