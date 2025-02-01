@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { HOME } from '@/constant/pathname';
 import { cn } from '@/lib/utils';
+import dayjs from 'dayjs';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
@@ -18,6 +19,8 @@ const CreateGoalPage = () => {
     const [period, setPeriod] = useState<number | null>(null);
     const [alertMsg, setAlertMsg] = useState<boolean>(false);
 
+    const now = dayjs();
+
     const handlePeriodClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         setPeriod(Number(e.currentTarget.value));
     };
@@ -30,6 +33,10 @@ const CreateGoalPage = () => {
         }
         const formData = new FormData(e.currentTarget);
 
+        const startDay = now.format('YYYY/MM/DD');
+        const endDay = now.add(period, 'day').format('YYYY/MM/DD');
+        // console.log(startDay, endDay);
+
         fetch('http://localhost:8000/challenges', {
             method: 'POST',
             headers: {
@@ -39,6 +46,8 @@ const CreateGoalPage = () => {
                 period,
                 challengeName: formData.get('challengeName'),
                 isFinished: false,
+                startDay,
+                endDay,
             }),
         })
             .then((res) => console.log(res))
