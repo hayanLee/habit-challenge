@@ -31,13 +31,7 @@ const MainPage = async () => {
                         {res
                             .filter((habit: HabitType) => !habit.isFinished)
                             .map((habit: HabitType) => (
-                                <Link
-                                    href={{
-                                        pathname: GOAL_DETAIL(habit.id),
-                                        query: { period: habit.period },
-                                    }}
-                                    key={habit.id}
-                                >
+                                <Link href={GOAL_DETAIL(habit.id)} key={habit.id}>
                                     <Challenge id={habit.id} habit={habit} />
                                 </Link>
                             ))}
