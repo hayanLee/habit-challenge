@@ -8,6 +8,11 @@ type GoalDetailProps = {
     searchParams: { [key: string]: string | undefined };
 };
 
+// 스티커 경로
+const directoryPath = path.join(process.cwd(), 'public/assets/stickers', `${'dog'}`);
+// 모든 스티커를 담은 배열로 가져오기
+const images = getImageArray(directoryPath, 'dog');
+
 const GoalDetailPage = async ({ params }: GoalDetailProps) => {
     const { goalId } = params;
 
@@ -20,7 +25,7 @@ const GoalDetailPage = async ({ params }: GoalDetailProps) => {
 
         return progressItem ? (
             <div className='day !bg-white relative border-point border-2 overflow-hidden' key={progressItem.date}>
-                <Image src={`/assets/stickers/${progressItem.sticker}`} alt='' fill className='object-contain' />
+                <Image src={progressItem.sticker} alt='' fill className='object-contain' />
             </div>
         ) : (
             <div key={idx} className='day'>
@@ -28,11 +33,6 @@ const GoalDetailPage = async ({ params }: GoalDetailProps) => {
             </div>
         );
     });
-
-    // 스티커 경로
-    const directoryPath = path.join(process.cwd(), 'public/assets/stickers', `${'dog'}`);
-    // 모든 스티커를 담은 배열로 가져오기
-    const images = getImageArray(directoryPath, 'dog');
 
     return (
         <div className='flex flex-col h-full'>
@@ -54,7 +54,7 @@ const GoalDetailPage = async ({ params }: GoalDetailProps) => {
                     </div>
                 </div>
 
-                <StickerDrawer images={images} />
+                <StickerDrawer images={images} goalId={goalId} />
             </div>
         </div>
     );

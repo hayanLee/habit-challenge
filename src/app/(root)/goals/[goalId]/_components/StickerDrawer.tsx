@@ -1,4 +1,5 @@
 'use client';
+import { submitSticker } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import {
     Drawer,
@@ -10,13 +11,21 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from '@/components/ui/drawer';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import React, { useState } from 'react';
 
-/*
- 
- 
- */
-const StickerDrawer = ({ images }: { images: string[] }) => {
+const StickerDrawer = ({ images, goalId }: { images: string[]; goalId: string }) => {
+    const [selectedSticker, setSelectedSticker] = useState<string | null>(null);
+    const handleClick = (img: string) => {
+        // console.log(img);
+        setSelectedSticker(img);
+    };
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (selectedSticker) await submitSticker(selectedSticker, goalId);
+    };
+
     return (
         <Drawer>
             <DrawerTrigger>
@@ -36,7 +45,11 @@ const StickerDrawer = ({ images }: { images: string[] }) => {
                             {images.map((image) => (
                                 <div
                                     key={image}
-                                    className='bg-white rounded-full relative aspect-square flex justify-center items-center'
+                                    className={cn(
+                                        'bg-white rounded-full relative aspect-square flex justify-center items-center border',
+                                        selectedSticker === image && 'border-point border-2'
+                                    )}
+                                    onClick={() => handleClick(image)}
                                 >
                                     <Image
                                         src={image}
@@ -51,11 +64,12 @@ const StickerDrawer = ({ images }: { images: string[] }) => {
                     </div>
 
                     <DrawerFooter>
-                        <Button size={'lg'}>Submit</Button>
                         <DrawerClose>
-                            <Button size={'lg'} variant={'outline'} className='w-full'>
-                                Cancel
-                            </Button>
+                            <form onSubmit={handleSubmit}>
+                                <Button type='submit' size={'lg'} disabled={!selectedSticker}>
+                                    Submit
+                                </Button>
+                            </form>
                         </DrawerClose>
                     </DrawerFooter>
                 </div>
