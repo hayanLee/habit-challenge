@@ -1,6 +1,6 @@
 import { HabitType } from '@/app/(root)/page';
 import CheckIcon from '@/assets/icons/check-icon.svg';
-const Challenge = ({ id, habit }: { id: string; habit: HabitType }) => {
+const Challenge = ({ id, habit, hasSucceededToday }: { id: string; habit: HabitType; hasSucceededToday?: boolean }) => {
     return (
         <div className='flex gap-3 my-3 items-center'>
             <div className='grow flex gap-2'>
@@ -12,7 +12,7 @@ const Challenge = ({ id, habit }: { id: string; habit: HabitType }) => {
                     </p>
                 </div>
             </div>
-            {habit.isFinished && <CheckIcon className='fill-point' />}
+            {hasSucceededToday && <CheckIcon className='fill-point' />}
         </div>
     );
 };
