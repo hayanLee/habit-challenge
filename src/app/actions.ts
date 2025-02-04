@@ -14,7 +14,8 @@ export async function submitSticker(sticker: string, goalId: string) {
         const challenge = await getRes.json();
 
         // 새로운 progress 배열
-        const updatedProgress = [...challenge.progress, { date: now.format('YYYY/MM/DD'), isSuccess: true, sticker }];
+        const updatedProgress = [...challenge.progress, { date: now.format('YYYY/MM/DD'), sticker }];
+        const isLastProcess = updatedProgress.length === challenge.period;
 
         // 업데이트 하기
         const patchRes = await fetch(`http://localhost:8000/challenges/${goalId}`, {
@@ -24,11 +25,10 @@ export async function submitSticker(sticker: string, goalId: string) {
             },
             body: JSON.stringify({
                 progress: updatedProgress,
+                isFinished: isLastProcess,
             }),
         });
         if (!patchRes.ok) throw new Error(`Failed to update: ${patchRes.statusText}`);
-
-        const data = await patchRes.json(); // 서버 응답 받기
         console.log('업데이트 성공:');
     } catch (e) {
         console.error('업데이트 실패:', e);
