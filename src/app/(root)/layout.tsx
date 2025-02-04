@@ -1,4 +1,5 @@
 import Header from '@/components/common/Header';
+import { Toaster } from '@/components/ui/toaster';
 import { PropsWithChildren } from 'react';
 
 const MainLayout = ({ children }: PropsWithChildren) => {
@@ -7,6 +8,7 @@ const MainLayout = ({ children }: PropsWithChildren) => {
             <div className='max-w-md h-full bg-background flex flex-col'>
                 <Header />
                 <main className='flex-grow min-h-0'>{children}</main>
+                <Toaster />
             </div>
         </div>
     );

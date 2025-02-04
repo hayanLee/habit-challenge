@@ -3,9 +3,11 @@ import LeftArrow from '@/assets/icons/arrow-icon.svg';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { HOME } from '@/constant/pathname';
+import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import dayjs from 'dayjs';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const PERIODS = [
@@ -16,6 +18,8 @@ const PERIODS = [
 ];
 
 const CreateGoalPage = () => {
+    const { toast } = useToast();
+    const router = useRouter();
     const [period, setPeriod] = useState<number | null>(null);
     const [alertMsg, setAlertMsg] = useState<boolean>(false);
 
@@ -24,7 +28,7 @@ const CreateGoalPage = () => {
     const handlePeriodClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         setPeriod(Number(e.currentTarget.value));
     };
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (!period) {
@@ -32,26 +36,41 @@ const CreateGoalPage = () => {
             return;
         }
         const formData = new FormData(e.currentTarget);
-
         const startDay = now.format('YYYY/MM/DD');
         const endDay = now.add(period, 'day').format('YYYY/MM/DD');
-        // console.log(startDay, endDay);
 
-        fetch('http://localhost:8000/challenges', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                period,
-                challengeName: formData.get('challengeName'),
-                isFinished: false,
-                startDay,
-                endDay,
-            }),
-        })
-            .then((res) => console.log(res))
-            .catch((err: Error) => console.log(err));
+        try {
+            const res = await fetch('http://localhost:8000/challenges', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    period,
+                    challengeName: formData.get('challengeName'),
+                    isFinished: false,
+                    startDay,
+                    endDay,
+                    progress: [],
+                }),
+            });
+
+            if (!res.ok) throw new Error('챌린지 추가 실패');
+
+            toast({
+                title: '등록 완료',
+                description: '새로운 챌린지가 등록되었습니다!',
+                duration: 2000,
+            });
+
+            router.replace(HOME);
+        } catch (e) {
+            toast({
+                title: '챌린지 추가 실패',
+                description: '문제가 발생했습니다. 다시 시도해주세요.',
+                variant: 'destructive',
+            });
+        }
     };
 
     return (
