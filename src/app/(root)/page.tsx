@@ -18,10 +18,10 @@ export type HabitType = {
 const MainPage = async () => {
     const now = dayjs();
 
-    const data = await fetch('http://localhost:8000/challenges');
-    const res = await data.json();
+    const res = await fetch('http://localhost:8000/challenges');
+    const data = await res.json();
+    const filteredData = data.filter((d: HabitType) => !d.isFinished);
 
-    console.log(res.filter((h: HabitType) => h.progress.at(-1)?.date !== now.format('YYYY/MM/DD')));
     return (
         <div className='flex flex-col h-full'>
             <div className='px-3.5'>
@@ -31,18 +31,17 @@ const MainPage = async () => {
             <div className='px-3.5 flex flex-col grow overflow-y-auto scrollbar-hide'>
                 <div>
                     <h3 className='title'>
-                        Daily Challenge <span className='text-orange-400'>({res.length})</span>
+                        Daily Challenge <span className='text-orange-400'>({filteredData.length})</span>
                     </h3>
                     <div>
                         {/* 미완료 
                         period > progress.length 
                         */}
-
-                        {res
+                        {filteredData
                             .filter((habit: HabitType) => habit.progress.at(-1)?.date !== now.format('YYYY/MM/DD'))
                             .map((habit: HabitType) => (
                                 <Link href={GOAL_DETAIL(habit.id)} key={habit.id}>
-                                    <Challenge id={habit.id} habit={habit} />
+                                    <Challenge habit={habit} />
                                 </Link>
                             ))}
                     </div>
@@ -53,11 +52,11 @@ const MainPage = async () => {
                 <div>
                     <div>
                         {/* 완료 */}
-                        {res
+                        {filteredData
                             .filter((habit: HabitType) => habit.progress.at(-1)?.date === now.format('YYYY/MM/DD'))
                             .map((habit: HabitType) => (
                                 <Link href={GOAL_DETAIL(habit.id)} key={habit.id}>
-                                    <Challenge id={habit.id} habit={habit} hasSucceededToday={true} />
+                                    <Challenge habit={habit} hasSucceededToday={true} />
                                 </Link>
                             ))}
                     </div>

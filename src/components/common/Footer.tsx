@@ -1,4 +1,4 @@
-import { GOALS_NEW, STICKERS } from '@/constant/pathname';
+import { GOALS_NEW, MILESTONE } from '@/constant/pathname';
 import Link from 'next/link';
 
 const Footer = () => {
@@ -8,9 +8,9 @@ const Footer = () => {
                 <span className='text-lg'>➕</span>
                 <p>Add</p>
             </Link>
-            <Link href={STICKERS} className='flex flex-col items-center p-1.5 w-full'>
+            <Link href={MILESTONE} className='flex flex-col items-center p-1.5 w-full'>
                 <span className='text-lg'>👻</span>
-                <p>Stickers</p>
+                <p>Milestone</p>
             </Link>
         </div>
     );

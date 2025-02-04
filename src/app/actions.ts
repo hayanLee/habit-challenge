@@ -29,7 +29,7 @@ export async function submitSticker(sticker: string, goalId: string) {
         if (!patchRes.ok) throw new Error(`Failed to update: ${patchRes.statusText}`);
 
         const data = await patchRes.json(); // 서버 응답 받기
-        console.log('업데이트 성공:', data);
+        console.log('업데이트 성공:');
     } catch (e) {
         console.error('업데이트 실패:', e);
     }

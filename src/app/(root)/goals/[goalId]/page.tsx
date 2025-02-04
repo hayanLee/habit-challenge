@@ -18,7 +18,7 @@ const GoalDetailPage = async ({ params }: GoalDetailProps) => {
 
     const data = await fetch(`http://localhost:8000/challenges/${goalId}`);
     const res = await data.json();
-    const { challengeName, startDay, endDay, period, progress } = res;
+    const { challengeName, startDay, endDay, period, progress, isFinished } = res;
 
     const periodArr = Array.from({ length: period }, (_, idx) => {
         const progressItem = progress[idx];
@@ -43,7 +43,6 @@ const GoalDetailPage = async ({ params }: GoalDetailProps) => {
                         {startDay} ~ {endDay}
                     </p>
                 </div>
-
                 <div className='mx-5 mt-7 mb-24'>
                     <div className='grid grid-cols-5 gap-3.5'>
                         {/*
@@ -53,8 +52,7 @@ const GoalDetailPage = async ({ params }: GoalDetailProps) => {
                         {periodArr}
                     </div>
                 </div>
-
-                <StickerDrawer images={images} goalId={goalId} />
+                {!isFinished && <StickerDrawer images={images} goalId={goalId} />}
             </div>
         </div>
     );

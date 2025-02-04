@@ -17,10 +17,8 @@ import React, { useState } from 'react';
 
 const StickerDrawer = ({ images, goalId }: { images: string[]; goalId: string }) => {
     const [selectedSticker, setSelectedSticker] = useState<string | null>(null);
-    const handleClick = (img: string) => {
-        // console.log(img);
-        setSelectedSticker(img);
-    };
+    const handleClick = (img: string) => setSelectedSticker(img);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (selectedSticker) await submitSticker(selectedSticker, goalId);
