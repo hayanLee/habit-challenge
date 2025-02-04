@@ -1,4 +1,5 @@
 import getImageArray from '@/utils/getImageArray';
+import dayjs from 'dayjs';
 import Image from 'next/image';
 import path from 'path';
 import StickerDrawer from './_components/StickerDrawer';
@@ -34,6 +35,11 @@ const GoalDetailPage = async ({ params }: GoalDetailProps) => {
         );
     });
 
+    const today = dayjs().format('YYYY/MM/DD');
+    const todaySticker = progress.some(
+        (item: { date: string; isSuccess: boolean; sticker: string }) => item.date === today
+    );
+
     return (
         <div className='flex flex-col h-full'>
             <div className='px-3.5 flex flex-col'>
@@ -52,7 +58,8 @@ const GoalDetailPage = async ({ params }: GoalDetailProps) => {
                         {periodArr}
                     </div>
                 </div>
-                {!isFinished && <StickerDrawer images={images} goalId={goalId} />}
+
+                {!isFinished && <StickerDrawer images={images} goalId={goalId} disabled={todaySticker} />}
             </div>
         </div>
     );

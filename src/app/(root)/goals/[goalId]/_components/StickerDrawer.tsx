@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
-const StickerDrawer = ({ images, goalId }: { images: string[]; goalId: string }) => {
+const StickerDrawer = ({ images, goalId, disabled }: { images: string[]; goalId: string; disabled: boolean }) => {
     const [selectedSticker, setSelectedSticker] = useState<string | null>(null);
     const handleClick = (img: string) => setSelectedSticker(img);
 
@@ -26,9 +26,9 @@ const StickerDrawer = ({ images, goalId }: { images: string[]; goalId: string })
 
     return (
         <Drawer>
-            <DrawerTrigger>
-                <Button size={'lg'} className='mx-auto'>
-                    Add Today&apos;s Sticker
+            <DrawerTrigger disabled={disabled}>
+                <Button size={'lg'} className='mx-auto' disabled={disabled}>
+                    {disabled ? '오늘은 스티커를 붙였어요!' : 'Add Sticker'}
                 </Button>
             </DrawerTrigger>
             <DrawerContent>
