@@ -26,6 +26,7 @@ export async function submitSticker(sticker: string, goalId: string) {
             body: JSON.stringify({
                 progress: updatedProgress,
                 isFinished: isLastProcess,
+                endDay: now.format('YYYY/MM/DD'),
             }),
         });
         if (!patchRes.ok) throw new Error(`Failed to update: ${patchRes.statusText}`);

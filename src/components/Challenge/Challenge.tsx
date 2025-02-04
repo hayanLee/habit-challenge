@@ -6,9 +6,7 @@ const Challenge = ({ habit, hasSucceededToday }: { habit: HabitType; hasSucceede
             <div className='grow flex gap-2'>
                 <div className='flex flex-col py-1 gap-2'>
                     <h4 className='text-lg font-semibold'>{habit.challengeName}</h4>
-                    <p className='bg-gray-200 rounded w-fit px-1.5 text-sm'>
-                        {habit.startDay}~{habit.endDay} (D-{habit.period})
-                    </p>
+                    <p className='bg-gray-200 rounded w-fit px-1.5 text-sm'>{habit.startDay} ~</p>
                 </div>
             </div>
             {hasSucceededToday && <CheckIcon className='fill-point' />}
