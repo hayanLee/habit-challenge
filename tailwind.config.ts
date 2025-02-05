@@ -15,6 +15,16 @@ const config: Config = {
                 point: 'rgb(var(--point))',
             },
         },
+        backgroundImage: {
+            gliter: 'var(--gliter)',
+        },
+        keyframes: {
+            glitter: {
+                '0%, 100%': { filter: 'brightness(1.2)' },
+                '50%': { filter: 'brightness(2)' },
+            },
+        },
+        animation: { glitter: 'glitter 3.5s infinite' },
     },
     plugins: [scrollbarHide],
 };

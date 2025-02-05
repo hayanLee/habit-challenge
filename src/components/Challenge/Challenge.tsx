@@ -1,15 +1,15 @@
 import { HabitType } from '@/app/(root)/page';
-import CheckIcon from '@/assets/icons/check-icon.svg';
+import { cn } from '@/lib/utils';
 const Challenge = ({ habit, hasSucceededToday }: { habit: HabitType; hasSucceededToday?: boolean }) => {
+    const progressPercentage = ((habit.progress.length / habit.period) * 100).toFixed(0);
+
     return (
-        <div className='flex gap-3 my-3 items-center'>
-            <div className='grow flex gap-2'>
-                <div className='flex flex-col py-1 gap-2'>
-                    <h4 className='text-lg font-semibold'>{habit.challengeName}</h4>
-                    <p className='bg-gray-200 rounded w-fit px-1.5 text-sm'>{habit.startDay} ~</p>
-                </div>
+        <div className={cn('flex flex-col gap-2 my-3 border rounded-md p-2', hasSucceededToday && 'bg-point')}>
+            <h4 className='text-lg font-semibold'>{habit.challengeName}</h4>
+            <div className='flex justify-between'>
+                <p className='rounded text-gray-500 text-sm flex items-center'>{habit.startDay} ~</p>
+                <p className='text-lg font-semibold'>{progressPercentage}%</p>
             </div>
-            {hasSucceededToday && <CheckIcon className='fill-point' />}
         </div>
     );
 };

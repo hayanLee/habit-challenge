@@ -6,6 +6,7 @@
     --foreground-rgb: 0, 0, 0;
     --background-rgb: 247, 247, 247;
     --point: 38, 203, 77;
+    --gliter: linear-gradient(135deg, #ffd700, #ff69b4);
 }
 
 body {
