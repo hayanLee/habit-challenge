@@ -19,6 +19,6 @@ body {
         @apply text-2xl font-semibold;
     }
     .day {
-        @apply bg-gray-300 rounded-[20px] flex justify-center items-center text-white/70 aspect-square;
+        @apply bg-gray-300 rounded-3xl flex justify-center items-center text-white/70 aspect-square;
     }
 }

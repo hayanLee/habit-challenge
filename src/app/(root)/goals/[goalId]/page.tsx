@@ -16,23 +16,20 @@ const images = getImageArray(directoryPath, 'dog');
 
 const GoalDetailPage = async ({ params }: GoalDetailProps) => {
     const { goalId } = params;
-
     const data = await fetch(`http://localhost:8000/challenges/${goalId}`);
     const res = await data.json();
     const { challengeName, startDay, endDay, period, progress, isFinished } = res;
-
-    const difference = isFinished ? dayjs(endDay).diff(dayjs(startDay), 'day') : null;
-
+    const difference = isFinished ? dayjs(endDay).diff(dayjs(startDay), 'day') : '';
     const periodArr = Array.from({ length: period }, (_, idx) => {
         const progressItem = progress[idx];
 
         return progressItem ? (
-            <div className='day !bg-white relative border-point border-2 overflow-hidden' key={progressItem.date}>
+            <div className='day !bg-white relative border-point border-2' key={progressItem.date}>
                 <Image src={progressItem.sticker} alt='' fill className='object-contain' />
             </div>
         ) : (
             <div key={idx} className='day'>
-                {idx + 1} {/* 1일부터 시작하도록 수정 */}
+                {idx + 1}
             </div>
         );
     });
@@ -43,26 +40,19 @@ const GoalDetailPage = async ({ params }: GoalDetailProps) => {
     );
 
     return (
-        <div className='flex flex-col h-full'>
-            <div className='px-3.5 flex flex-col'>
-                <div>
-                    <h3 className='title'>{challengeName}</h3>
-                    <p>
-                        {startDay} ~ {isFinished && endDay} {difference + 'days'}
-                    </p>
-                </div>
-                <div className='mx-5 mt-7 mb-24'>
-                    <div className='grid grid-cols-5 gap-3.5'>
-                        {/*
-                         * 완료된 날에는 스티커
-                         * 미완료된 날에는 날짜
-                         */}
-                        {periodArr}
-                    </div>
-                </div>
-
-                {!isFinished && <StickerDrawer images={images} goalId={goalId} disabled={todaySticker} />}
+        <div className='flex flex-col gap-3 bg-blue h-full'>
+            <div>
+                <h3 className='text-xl font-semibold'>{challengeName}</h3>
+                <p className='text-gray-500'>
+                    {startDay} ~ {isFinished && endDay} {difference && `${difference}days`}
+                </p>
             </div>
+
+            <div className='overflow-y-auto p-3 '>
+                <div className='grid grid-cols-5 gap-3.5'>{periodArr}</div>
+            </div>
+
+            {!isFinished && <StickerDrawer images={images} goalId={goalId} disabled={todaySticker} />}
         </div>
     );
 };
