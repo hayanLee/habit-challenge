@@ -11,6 +11,7 @@ export type HabitType = {
     isFinished: boolean;
     startDay: string;
     endDay: string;
+    category: string;
     progress: { date: string; sticker: string }[];
 };
 
@@ -33,24 +34,20 @@ const MainPage = async () => {
             <h3 className='title'>
                 Goals <span className='text-point'>({uncompletedData.length})</span>
             </h3>
-            <div className='flex flex-col grow overflow-y-auto scrollbar-hide'>
-                <div>
-                    {uncompletedData.map((habit: HabitType) => (
-                        <Link href={GOAL_DETAIL(habit.id)} key={habit.id}>
-                            <Challenge habit={habit} />
-                        </Link>
-                    ))}
-                </div>
+            <div className='flex flex-col grow overflow-y-auto scrollbar-hide gap-2 my-3'>
+                {uncompletedData.map((habit: HabitType) => (
+                    <Link href={GOAL_DETAIL(habit.id)} key={habit.id}>
+                        <Challenge habit={habit} />
+                    </Link>
+                ))}
 
                 <div className='border border-dashed my-3'></div>
 
-                <div>
-                    {completedData.map((habit: HabitType) => (
-                        <Link href={GOAL_DETAIL(habit.id)} key={habit.id}>
-                            <Challenge habit={habit} hasSucceededToday={true} />
-                        </Link>
-                    ))}
-                </div>
+                {completedData.map((habit: HabitType) => (
+                    <Link href={GOAL_DETAIL(habit.id)} key={habit.id}>
+                        <Challenge habit={habit} hasSucceededToday={true} />
+                    </Link>
+                ))}
             </div>
         </div>
     );
