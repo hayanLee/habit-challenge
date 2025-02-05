@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
+import { DynaPuff } from 'next/font/google';
 import localFont from 'next/font/local';
 import './globals.css';
+
+const dynapuff = DynaPuff({
+    subsets: ['latin'],
+});
 
 const pretendard = localFont({
     src: '../assets/fonts/PretendardVariable.woff2',
@@ -18,8 +23,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang='ko' className={`${pretendard.variable}`}>
-            <body className={pretendard.className}>{children}</body>
+        <html lang='ko' className={`${dynapuff.className} ${pretendard.variable}`}>
+            <body>{children}</body>
         </html>
     );
 }
