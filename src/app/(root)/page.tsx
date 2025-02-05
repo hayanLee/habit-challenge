@@ -28,23 +28,21 @@ const MainPage = async () => {
                 <Profile />
             </div>
 
+            <h3 className='title px-3.5 '>
+                Daily Challenge <span className='text-orange-400'>({filteredData.length})</span>
+            </h3>
             <div className='px-3.5 flex flex-col grow overflow-y-auto scrollbar-hide'>
                 <div>
-                    <h3 className='title'>
-                        Daily Challenge <span className='text-orange-400'>({filteredData.length})</span>
-                    </h3>
-                    <div>
-                        {/* 미완료 
+                    {/* 미완료 
                         period > progress.length 
                         */}
-                        {filteredData
-                            .filter((habit: HabitType) => habit.progress.at(-1)?.date !== now.format('YYYY/MM/DD'))
-                            .map((habit: HabitType) => (
-                                <Link href={GOAL_DETAIL(habit.id)} key={habit.id}>
-                                    <Challenge habit={habit} />
-                                </Link>
-                            ))}
-                    </div>
+                    {filteredData
+                        .filter((habit: HabitType) => habit.progress.at(-1)?.date !== now.format('YYYY/MM/DD'))
+                        .map((habit: HabitType) => (
+                            <Link href={GOAL_DETAIL(habit.id)} key={habit.id}>
+                                <Challenge habit={habit} />
+                            </Link>
+                        ))}
                 </div>
 
                 <div className='border border-dashed my-3'></div>
