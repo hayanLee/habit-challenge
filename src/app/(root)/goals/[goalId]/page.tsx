@@ -19,7 +19,7 @@ const GoalDetailPage = async ({ params }: GoalDetailProps) => {
     const data = await fetch(`http://localhost:8000/challenges/${goalId}`);
     const res = await data.json();
     const { challengeName, startDay, endDay, period, progress, isFinished } = res;
-    const difference = isFinished ? dayjs(endDay).diff(dayjs(startDay), 'day') : '';
+
     const periodArr = Array.from({ length: period }, (_, idx) => {
         const progressItem = progress[idx];
 
@@ -44,7 +44,7 @@ const GoalDetailPage = async ({ params }: GoalDetailProps) => {
             <div>
                 <h3 className='text-xl font-semibold'>{challengeName}</h3>
                 <p className='text-gray-500'>
-                    {startDay} ~ {isFinished && endDay} {difference && `${difference}days`}
+                    {startDay} ~ {isFinished && endDay}
                 </p>
             </div>
 

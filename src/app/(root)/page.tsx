@@ -1,4 +1,4 @@
-import Challenge from '@/components/Challenge/Challenge';
+import ChallengeCard from '@/components/Card/ChallengeCard';
 import Profile from '@/components/Profile/Profile';
 import { GOAL_DETAIL } from '@/constant/pathname';
 import dayjs from 'dayjs';
@@ -37,7 +37,7 @@ const MainPage = async () => {
             <div className='flex flex-col grow overflow-y-auto scrollbar-hide gap-2 my-3'>
                 {uncompletedData.map((habit: HabitType) => (
                     <Link href={GOAL_DETAIL(habit.id)} key={habit.id}>
-                        <Challenge habit={habit} />
+                        <ChallengeCard habit={habit} />
                     </Link>
                 ))}
 
@@ -45,7 +45,7 @@ const MainPage = async () => {
 
                 {completedData.map((habit: HabitType) => (
                     <Link href={GOAL_DETAIL(habit.id)} key={habit.id}>
-                        <Challenge habit={habit} hasSucceededToday={true} />
+                        <ChallengeCard habit={habit} hasSucceededToday={true} />
                     </Link>
                 ))}
             </div>
