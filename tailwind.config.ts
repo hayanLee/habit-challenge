@@ -56,11 +56,6 @@ const config: Config = {
                 },
             },
             animation: { glitter: 'glitter 3.5s infinite' },
-            borderRadius: {
-                lg: 'var(--radius)',
-                md: 'calc(var(--radius) - 2px)',
-                sm: 'calc(var(--radius) - 4px)',
-            },
         },
     },
     plugins: [scrollbarHide],
