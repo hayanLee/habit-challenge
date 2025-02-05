@@ -13,14 +13,14 @@ const categoryColors: Record<string, string> = {
 };
 
 const ChallengeCard = ({ habit, hasSucceededToday }: { habit: HabitType; hasSucceededToday?: boolean }) => {
-    const isFinished = !!habit.endDay;
+    const isFinished = habit.isFinished;
     const progressPercentage = ((habit.progress.length / habit.period) * 100).toFixed(0);
     const difference = isFinished && dayjs(habit.endDay).diff(dayjs(habit.startDay), 'day') + 1;
     return (
         <div
             className={cn(
                 'flex items-end gap-2 border rounded-lg p-4',
-                isFinished ? 'bg-gliter animate-glitter my-3' : hasSucceededToday && 'bg-point'
+                isFinished ? 'bg-gliter animate-glitter my-3' : hasSucceededToday && 'bg-point brightness-125'
             )}
         >
             <div className='grow flex flex-col gap-4'>
