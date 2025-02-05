@@ -1,5 +1,4 @@
 import Challenge from '@/components/Challenge/Challenge';
-import Footer from '@/components/common/Footer';
 import Profile from '@/components/Profile/Profile';
 import { GOAL_DETAIL } from '@/constant/pathname';
 import dayjs from 'dayjs';
@@ -12,12 +11,11 @@ export type HabitType = {
     isFinished: boolean;
     startDay: string;
     endDay: string;
-    progress: { date: string; isSuccess: boolean; sticker: string }[];
+    progress: { date: string; sticker: string }[];
 };
 
 const MainPage = async () => {
     const now = dayjs();
-
     const res = await fetch('http://localhost:8000/challenges');
     const data = await res.json();
     const filteredData = data.filter((d: HabitType) => !d.isFinished);
@@ -60,8 +58,6 @@ const MainPage = async () => {
                     </div>
                 </div>
             </div>
-
-            <Footer />
         </div>
     );
 };

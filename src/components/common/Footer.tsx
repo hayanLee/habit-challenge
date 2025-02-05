@@ -1,17 +1,21 @@
-import { GOALS_NEW, MILESTONE } from '@/constant/pathname';
+import { GOALS_NEW, HOME, MILESTONE } from '@/constant/pathname';
+import { CirclePlus, House, LibraryBig } from 'lucide-react';
 import Link from 'next/link';
 
 const Footer = () => {
     return (
-        <div className='w-full shadow-md flex justify-around bg-background drop-shadow-2xl'>
-            <Link href={GOALS_NEW} className='flex flex-col items-center p-1.5 w-full'>
-                <span className='text-lg'>➕</span>
-                <p>Add</p>
-            </Link>
-            <Link href={MILESTONE} className='flex flex-col items-center p-1.5 w-full'>
-                <span className='text-lg'>👻</span>
-                <p>Milestone</p>
-            </Link>
+        <div className='w-full py-4'>
+            <div className='flex justify-around items-center'>
+                <Link href={GOALS_NEW}>
+                    <CirclePlus size={30} strokeWidth={2} />
+                </Link>
+                <Link href={HOME}>
+                    <House size={30} strokeWidth={2} />
+                </Link>
+                <Link href={MILESTONE}>
+                    <LibraryBig size={30} strokeWidth={2} />
+                </Link>
+            </div>
         </div>
     );
 };
