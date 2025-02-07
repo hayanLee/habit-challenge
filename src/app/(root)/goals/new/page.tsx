@@ -41,21 +41,18 @@ const CreateGoalPage = () => {
             return;
         }
         const formData = new FormData(e.currentTarget);
-        const startDay = now.format('YYYY/MM/DD');
-
         const newChallengeDate = {
             period,
             challengeName: formData.get('challengeName') as string,
             isFinished: false,
-            startDay,
+            startDay: now.format('YYYY/MM/DD'),
             endDay: '',
             category: formData.get('category') as string,
             progress: [],
         };
 
         const result = await addChallenge(newChallengeDate);
-        console.log(result);
-        if (result?.success) {
+        if (result.success) {
             router.replace(HOME);
             return toast({
                 title: '등록 완료',

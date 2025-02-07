@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteSticker } from '@/app/actions';
+import { deleteChallenge } from '@/app/actions';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -19,12 +19,8 @@ import { useRouter } from 'next/navigation';
 const TrashButton = ({ goalId }: { goalId: string }) => {
     const router = useRouter();
     const handleClick = async (goalId: string) => {
-        try {
-            await deleteSticker(goalId);
-            router.replace(HOME);
-        } catch (e) {
-            console.log('삭제 실패', e);
-        }
+        const { success } = await deleteChallenge(goalId);
+        if (success) router.replace(HOME);
     };
     return (
         <AlertDialog>

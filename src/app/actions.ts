@@ -14,10 +14,11 @@ export async function addChallenge(newChallenge: Omit<HabitType, 'id'>) {
             body: JSON.stringify(newChallenge),
         });
         if (!res.ok) throw new Error('챌린지 추가 실패');
-        revalidatePath('http://localhost:8000/challenges');
+        revalidatePath('/challenges');
         return { success: true };
     } catch (e) {
         console.error('등록 실패:', e);
+        return { success: false, error: e instanceof Error ? e.message : 'Unknown error occurred' };
     }
 }
 
@@ -49,26 +50,24 @@ export async function submitSticker(sticker: string, goalId: string) {
             }),
         });
         if (!patchRes.ok) throw new Error(`Failed to update: ${patchRes.statusText}`);
-        revalidatePath(`http://localhost:8000/challenges/${goalId}`);
+        revalidatePath(`/challenges/${goalId}`);
         console.log('업데이트 성공:');
     } catch (e) {
         console.error('업데이트 실패:', e);
+        return { success: false, error: e instanceof Error ? e.message : 'Unknown error occurred' };
     }
 }
 
-export async function deleteSticker(goalId: string) {
+export async function deleteChallenge(goalId: string) {
     try {
-        const getRes = await fetch(`http://localhost:8000/challenges/${goalId}`);
-        if (!getRes.ok) throw new Error(`fail to get : ${getRes.statusText}`);
-
         const delteRes = await fetch(`http://localhost:8000/challenges/${goalId}`, {
             method: 'DELETE',
         });
-
         if (!delteRes.ok) throw new Error(`Failed to delete: ${delteRes.statusText}`);
-        revalidatePath(`http://localhost:8000/challenges`);
-        console.log('삭제 성공');
+        revalidatePath(`/challenges`);
+        return { success: true };
     } catch (e) {
         console.error('삭제 실패:', e);
+        return { success: false, error: e instanceof Error ? e.message : 'Unknown error occurred' };
     }
 }

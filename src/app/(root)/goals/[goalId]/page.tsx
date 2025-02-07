@@ -19,9 +19,12 @@ const GoalDetailPage = async ({ params }: GoalDetailProps) => {
     const { goalId } = params;
     const data = await fetch(`http://localhost:8000/challenges/${goalId}`);
     if (!data.ok) return;
-
     const res = await data.json();
+
     const { challengeName, startDay, endDay, period, progress, isFinished } = res;
+
+    const today = dayjs().format('YYYY/MM/DD');
+    const todaySticker = progress[progress.length - 1]?.date === today;
 
     const periodArr = Array.from({ length: period }, (_, idx) => {
         const progressItem = progress[idx];
@@ -36,11 +39,6 @@ const GoalDetailPage = async ({ params }: GoalDetailProps) => {
             </div>
         );
     });
-
-    const today = dayjs().format('YYYY/MM/DD');
-    const todaySticker = progress.some(
-        (item: { date: string; isSuccess: boolean; sticker: string }) => item.date === today
-    );
 
     return (
         <div className='flex flex-col gap-3 bg-blue h-full'>
