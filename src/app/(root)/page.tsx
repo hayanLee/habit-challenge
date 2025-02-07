@@ -34,6 +34,11 @@ const MainPage = async () => {
             <h3 className='title'>
                 Goals <span className='text-point'>({uncompletedData.length})</span>
             </h3>
+
+            {!data.length && (
+                <div className='text-center font-semibold text-lg text-gray-400'>새로운 챌린지를 시작해보세요 !</div>
+            )}
+
             <div className='flex flex-col grow overflow-y-auto scrollbar-hide gap-2 my-3'>
                 {uncompletedData.map((habit: HabitType) => (
                     <Link href={GOAL_DETAIL(habit.id)} key={habit.id}>
@@ -41,7 +46,11 @@ const MainPage = async () => {
                     </Link>
                 ))}
 
-                <div className='border border-dashed my-3'></div>
+                <div className='flex items-center my-3'>
+                    <div className='flex-1 border-t border-dashed border-gray-300'></div>
+                    <span className='mx-4 font-semibold'>오늘의 한 걸음</span>
+                    <div className='flex-1 border-t border-dashed border-gray-300'></div>
+                </div>
 
                 {completedData.map((habit: HabitType) => (
                     <Link href={GOAL_DETAIL(habit.id)} key={habit.id}>
