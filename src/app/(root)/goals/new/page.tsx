@@ -1,4 +1,5 @@
 'use client';
+import { addChallenge } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -27,6 +28,7 @@ const CreateGoalPage = () => {
     const handlePeriodClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         setPeriod(Number(e.currentTarget.value));
     };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -41,34 +43,27 @@ const CreateGoalPage = () => {
         const formData = new FormData(e.currentTarget);
         const startDay = now.format('YYYY/MM/DD');
 
-        try {
-            const res = await fetch('http://localhost:8000/challenges', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    period,
-                    challengeName: formData.get('challengeName'),
-                    isFinished: false,
-                    startDay,
-                    endDay: '',
-                    category: formData.get('category'),
-                    progress: [],
-                }),
-            });
+        const newChallengeDate = {
+            period,
+            challengeName: formData.get('challengeName') as string,
+            isFinished: false,
+            startDay,
+            endDay: '',
+            category: formData.get('category') as string,
+            progress: [],
+        };
 
-            if (!res.ok) throw new Error('챌린지 추가 실패');
-
-            toast({
+        const result = await addChallenge(newChallengeDate);
+        console.log(result);
+        if (result?.success) {
+            router.replace(HOME);
+            return toast({
                 title: '등록 완료',
                 description: '새로운 챌린지가 등록되었습니다!',
                 duration: 2000,
             });
-
-            router.replace(HOME);
-        } catch (e) {
-            toast({
+        } else {
+            return toast({
                 title: '챌린지 추가 실패',
                 description: '문제가 발생했습니다. 다시 시도해주세요.',
                 variant: 'destructive',
@@ -133,12 +128,6 @@ const CreateGoalPage = () => {
                             <RadioGroupItem value='Work' id='Work' />
                             <Label htmlFor='Work' className='bg-yellow-300 p-0.5 rounded'>
                                 Work
-                            </Label>
-                        </div>
-                        <div className='flex items-center space-x-2'>
-                            <RadioGroupItem value='Trevel' id='Trevel' />
-                            <Label htmlFor='Trevel' className='bg-orange-300 p-0.5 rounded'>
-                                Trevel
                             </Label>
                         </div>
                     </RadioGroup>

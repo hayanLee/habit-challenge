@@ -2,6 +2,24 @@
 
 import dayjs from 'dayjs';
 import { revalidatePath } from 'next/cache';
+import { HabitType } from './(root)/page';
+
+export async function addChallenge(newChallenge: Omit<HabitType, 'id'>) {
+    try {
+        const res = await fetch('http://localhost:8000/challenges', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newChallenge),
+        });
+        if (!res.ok) throw new Error('챌린지 추가 실패');
+        revalidatePath('http://localhost:8000/challenges');
+        return { success: true };
+    } catch (e) {
+        console.error('등록 실패:', e);
+    }
+}
 
 export async function submitSticker(sticker: string, goalId: string) {
     // 서버에서 sticker 처리하기 (예: DB에 저장)
@@ -27,7 +45,7 @@ export async function submitSticker(sticker: string, goalId: string) {
             body: JSON.stringify({
                 progress: updatedProgress,
                 isFinished: isLastProcess,
-                endDay: now.format('YYYY/MM/DD'),
+                endDay: isLastProcess && now.format('YYYY/MM/DD'),
             }),
         });
         if (!patchRes.ok) throw new Error(`Failed to update: ${patchRes.statusText}`);
