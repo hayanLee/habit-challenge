@@ -5,7 +5,7 @@ import { AlarmClockCheck } from 'lucide-react';
 
 const categoryColors: Record<string, string> = {
     Health: 'bg-red-300',
-    SelfCare: 'bg-blue-300',
+    'Self-care': 'bg-blue-300',
     Learning: 'bg-green-300',
     Hobby: 'bg-purple-300',
     Work: 'bg-yellow-300',
