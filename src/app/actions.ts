@@ -1,6 +1,7 @@
 'use server';
 
 import dayjs from 'dayjs';
+import { revalidatePath } from 'next/cache';
 
 export async function submitSticker(sticker: string, goalId: string) {
     // 서버에서 sticker 처리하기 (예: DB에 저장)
@@ -30,6 +31,7 @@ export async function submitSticker(sticker: string, goalId: string) {
             }),
         });
         if (!patchRes.ok) throw new Error(`Failed to update: ${patchRes.statusText}`);
+        revalidatePath(`http://localhost:8000/challenges/${goalId}`);
         console.log('업데이트 성공:');
     } catch (e) {
         console.error('업데이트 실패:', e);
