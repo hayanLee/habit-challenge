@@ -1,3 +1,4 @@
+import TrashButton from '@/components/Button/TrashButton';
 import getImageArray from '@/utils/getImageArray';
 import dayjs from 'dayjs';
 import Image from 'next/image';
@@ -17,6 +18,8 @@ const images = getImageArray(directoryPath, 'dog');
 const GoalDetailPage = async ({ params }: GoalDetailProps) => {
     const { goalId } = params;
     const data = await fetch(`http://localhost:8000/challenges/${goalId}`);
+    if (!data.ok) return;
+
     const res = await data.json();
     const { challengeName, startDay, endDay, period, progress, isFinished } = res;
 
@@ -41,11 +44,14 @@ const GoalDetailPage = async ({ params }: GoalDetailProps) => {
 
     return (
         <div className='flex flex-col gap-3 bg-blue h-full'>
-            <div>
-                <h3 className='text-xl font-semibold'>{challengeName}</h3>
-                <p className='text-gray-500'>
-                    {startDay} ~ {isFinished && endDay}
-                </p>
+            <div className='flex justify-between items-center'>
+                <div>
+                    <h3 className='text-xl font-semibold'>{challengeName}</h3>
+                    <p className='text-gray-500'>
+                        {startDay} ~ {isFinished && endDay}
+                    </p>
+                </div>
+                <TrashButton goalId={goalId} />
             </div>
 
             <div className='overflow-y-auto p-3 '>

@@ -37,3 +37,20 @@ export async function submitSticker(sticker: string, goalId: string) {
         console.error('업데이트 실패:', e);
     }
 }
+
+export async function deleteSticker(goalId: string) {
+    try {
+        const getRes = await fetch(`http://localhost:8000/challenges/${goalId}`);
+        if (!getRes.ok) throw new Error(`fail to get : ${getRes.statusText}`);
+
+        const delteRes = await fetch(`http://localhost:8000/challenges/${goalId}`, {
+            method: 'DELETE',
+        });
+
+        if (!delteRes.ok) throw new Error(`Failed to delete: ${delteRes.statusText}`);
+        revalidatePath(`http://localhost:8000/challenges`);
+        console.log('삭제 성공');
+    } catch (e) {
+        console.error('삭제 실패:', e);
+    }
+}
